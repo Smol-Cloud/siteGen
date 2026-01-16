@@ -1,10 +1,17 @@
+
+from typing import Optional, Dict
 from htmlnode import HTMLNode
 
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props=None):
+    def __init__(
+        self,
+        tag: Optional[str],
+        value: str,
+        props: Optional[Dict[str, str]] = None
+    ) -> None:
         super().__init__(tag, value, None, props)
-    
-    def to_html(self):
+
+    def to_html(self) -> str:
         # If the leaf node has no value, it should raise a ValueError. All leaf nodes must have a value.
         if self.value is None:
             raise ValueError("Leaf nodes must have a value.")
@@ -16,6 +23,6 @@ class LeafNode(HTMLNode):
         closing_tag = f"</{self.tag}>"
         value_html = self.value if self.value else ""
         return f"{opening_tag}{value_html}{closing_tag}"
-    
-    def __repr__(self):
+
+    def __repr__(self) -> str:
         return f"LeafNode(tag={self.tag}, value={self.value}, props={self.props})"
