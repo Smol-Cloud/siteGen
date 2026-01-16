@@ -2,7 +2,7 @@ from htmlnode import HTMLNode
 
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
-        super().__init__(tag=tag, value=value, children=None, props=props)
+        super().__init__(tag, value, None, props)
     
     def to_html(self):
         # If the leaf node has no value, it should raise a ValueError. All leaf nodes must have a value.
@@ -16,3 +16,6 @@ class LeafNode(HTMLNode):
         closing_tag = f"</{self.tag}>"
         value_html = self.value if self.value else ""
         return f"{opening_tag}{value_html}{closing_tag}"
+    
+    def __repr__(self):
+        return f"LeafNode({self.tag}, {self.value}, {self.props})"

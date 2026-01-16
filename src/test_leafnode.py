@@ -27,5 +27,10 @@ class TestLeafNode(unittest.TestCase):
             node = LeafNode(tag="p", value=None)
             node.to_html()
 
+    def test_repr(self):
+        node = LeafNode(tag="p", value="Paragraph", props={"style": "color:red;"})
+        expected_repr = "LeafNode(p, Paragraph, {'style': 'color:red;'})"
+        self.assertEqual(repr(node), expected_repr)
+
 if __name__ == "__main__":
     unittest.main()
