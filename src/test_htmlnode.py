@@ -2,7 +2,6 @@ import unittest
 
 from htmlnode import HTMLNode
 
-
 class TestHTMLNode(unittest.TestCase):
     def test_init(self):
         node = HTMLNode(tag="div", value="Hello", children=[], props={"class": "my-class"})
