@@ -28,11 +28,11 @@ class TestTextNodeToHtmlNode(unittest.TestCase):
         self.assertEqual(html_node.value, "print('Hello')")
 
     def test_link_type(self):
-        text_node = TextNode(text_type=TextType.LINK, text="OpenAI", url="https://openai.com")
+        text_node = TextNode(text_type=TextType.LINK, text="OpenAI", url="https://example.com")
         html_node = text_node_to_html_node(text_node)
         self.assertEqual(html_node.tag, "a")
         self.assertEqual(html_node.value, "OpenAI")
-        self.assertEqual(getattr(html_node, "props", {}).get("href"), "https://openai.com")
+        self.assertEqual(getattr(html_node, "props", {}).get("href"), "https://example.com")
 
     def test_image_type(self):
         text_node = TextNode(text_type=TextType.IMAGE, text="An image", url="https://example.com/image.png")
@@ -43,7 +43,7 @@ class TestTextNodeToHtmlNode(unittest.TestCase):
         self.assertEqual(getattr(html_node, "props", {}).get("alt"), "An image")
 
     def test_unsupported_type(self):
-        text_node = TextNode(text_type="UNSUPPORTED", text="Unsupported")
+        text_node = TextNode(text_type="UNSUPPORTED", text="Unsupported") # pyright: ignore[reportArgumentType]
         with self.assertRaises(ValueError) as context:
             text_node_to_html_node(text_node)
         self.assertEqual(str(context.exception), "Unsupported TextType: UNSUPPORTED")
